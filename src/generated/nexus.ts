@@ -48,6 +48,7 @@ export interface NexusGenInputs {
   TaskCreateInput: { // input type
     categoryId?: NexusGenScalars['UUID'] | null; // UUID
     description?: string | null; // String
+    isCompleted?: boolean | null; // Boolean
     name: string; // String!
   }
 }
@@ -90,6 +91,7 @@ export interface NexusGenObjects {
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description?: string | null; // String
     id?: NexusGenScalars['UUID'] | null; // UUID
+    isCompleted: boolean; // Boolean!
     name: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
@@ -151,6 +153,7 @@ export interface NexusGenFieldTypes {
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string | null; // String
     id: NexusGenScalars['UUID'] | null; // UUID
+    isCompleted: boolean; // Boolean!
     name: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
@@ -202,6 +205,7 @@ export interface NexusGenFieldTypeNames {
     createdAt: 'DateTime'
     description: 'String'
     id: 'UUID'
+    isCompleted: 'Boolean'
     name: 'String'
     updatedAt: 'DateTime'
   }

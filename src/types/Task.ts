@@ -9,6 +9,7 @@ export const TaskType = objectType({
     t.field(Task.name);
     t.field('categoryId', { type: 'UUID' });
     t.field(Task.description);
+    t.field(Task.isCompleted);
     t.field(Task.createdAt);
     t.field(Task.updatedAt);
   },

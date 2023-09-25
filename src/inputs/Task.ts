@@ -6,5 +6,6 @@ export const TaskCreateInput = inputObjectType({
     t.nonNull.string('name');
     t.string('description');
     t.field('categoryId', { type: 'UUID' });
+    t.boolean('isCompleted');
   },
 });
