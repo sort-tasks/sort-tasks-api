@@ -1,11 +1,9 @@
 import { compare } from 'bcryptjs';
 import { hash } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import {APP_SECRET} from "../utils/utils"
-import {mutationField, nonNull, arg} from "nexus"
-import {inputObjectType, objectType} from "nexus"
-
-
+import { APP_SECRET } from '../utils/utils';
+import { mutationField, nonNull, arg } from 'nexus';
+import { inputObjectType, objectType } from 'nexus';
 
 export const RegisterInput = inputObjectType({
   name: 'RegisterInput',
@@ -35,21 +33,13 @@ export const AuthPayload = objectType({
   },
 });
 
-
-
 export const registerMutation = mutationField('register', {
   type: 'String',
   args: {
-    input: nonNull(arg({ type: "RegisterInput" })),
+    input: nonNull(arg({ type: 'RegisterInput' })),
   },
-  resolve: async (_parent, {input: {
-    password,
-    email,
-    firstName,
-    lastName
-  }}, ctx) => {
+  resolve: async (_parent, { input: { password, email, firstName, lastName } }, ctx) => {
     const hashedPassword = await hash(password, 10);
-
 
     const foundEmail = await ctx.prisma.user.findUnique({
       where: {
@@ -72,22 +62,15 @@ export const registerMutation = mutationField('register', {
     });
 
     return 'OK';
-  }
-})
+  },
+});
 
 export const loginMutation = mutationField('login', {
   type: 'AuthPayload',
   args: {
-    input: nonNull(arg({ type: "LoginInput" })),
+    input: nonNull(arg({ type: 'LoginInput' })),
   },
-  resolve: async (_parent, {
-    input: {
-      email,
-      password,
-    }
-  }, ctx) => {
-
-
+  resolve: async (_parent, { input: { email, password } }, ctx) => {
     const user = await ctx.prisma.user.findUnique({
       where: {
         email,
@@ -108,10 +91,9 @@ export const loginMutation = mutationField('login', {
       throw new Error('Email has not been confirmed');
     }
 
-
     return {
       token: sign({ userId: user.id }, APP_SECRET),
       user,
     };
-  }
-})
+  },
+});

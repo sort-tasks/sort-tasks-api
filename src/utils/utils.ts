@@ -1,6 +1,6 @@
 import { AuthenticationError } from 'apollo-server';
 import { verify } from 'jsonwebtoken';
-import {User} from "@prisma/client"
+import { User } from '@prisma/client';
 
 import { Context } from '../context';
 
@@ -12,10 +12,7 @@ interface Token {
 }
 
 export async function getUserId(context: Context): Promise<User> {
-
   const Authorization = context.req.headers.authorization;
-
-
 
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '');

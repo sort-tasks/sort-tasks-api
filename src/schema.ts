@@ -1,32 +1,27 @@
 import * as path from 'path';
-import NexusPrismaScalars from 'nexus-prisma/scalars'
-import { GraphQLScalarType } from 'graphql'
-import { makeSchema, objectType, asNexusMethod, scalarType } from 'nexus'
-// import {User} from 'nexus-prisma'
+import NexusPrismaScalars from 'nexus-prisma/scalars';
+import { GraphQLScalarType } from 'graphql';
+import { makeSchema, asNexusMethod, scalarType } from 'nexus';
 
 import { GraphQLUUID } from 'graphql-scalars';
 
 const UUID = scalarType({
   ...GraphQLUUID,
-  name: "UUID", // You can rename it if you wish
+  name: 'UUID', // You can rename it if you wish
 });
 
-import { JSONObjectResolver, DateTimeResolver } from 'graphql-scalars'
+import { DateTimeResolver } from 'graphql-scalars';
 
+import * as Queries from './Queries';
+import * as Mutations from './Mutations/Auth';
 
-import * as Queries from './Queries'
-import * as Mutations from "./Mutations/Auth"
-
-
-const dateTimeScalar = new GraphQLScalarType(DateTimeResolver)
-const uuidScaler = new GraphQLScalarType(GraphQLUUID)
+const dateTimeScalar = new GraphQLScalarType(DateTimeResolver);
 
 export const schema = makeSchema({
   types: [
     NexusPrismaScalars,
     UUID,
     asNexusMethod(dateTimeScalar, 'dateTime'),
-    // asNexusMethod(GraphQLUUID, 'uuid'),
     ...Object.values(Queries),
     ...Object.values(Mutations),
   ],
@@ -39,4 +34,4 @@ export const schema = makeSchema({
     alias: 'Context',
     export: 'Context',
   },
-})
+});

@@ -1,50 +1,46 @@
 {
-  "name": "withmoney-api",
-  "version": "2.0.0",
-  "description": "withmoney backend project",
+  "name": "sort-tasks-api",
+  "version": "0.0.0",
+  "description": "sort tasks backend project",
   "main": "src/main.ts",
   "scripts": {
     "dev": "cross-env NODE_ENV=development env-cmd ts-node-dev --no-notify --respawn --transpile-only src/main.ts",
-    "start": "node dist/src/main",
-    "start:prod": "cross-env NODE_ENV=production npm start",
-    "clean": "rm -rf dist",
-    "build": "npm -s run clean && cp .env.example prisma/.env && tsc",
-    "build:only": "tsc",
-    "build:prod": "env-cmd tsc",
-    "heroku-postbuild": "npm -s run generate && prisma db push --preview-feature --force && npm run build",
-    "test": "jest",
-    "generate": "npm run generate:prisma && npm -s run generate:nexus",
-    "generate:prisma": "prisma generate",
-    "generate:nexus": "ts-node --transpile-only src/schema",
-    "migrate:save": "env-cmd prisma migrate dev --preview-feature",
-    "migrate:up": "env-cmd prisma db push --preview-feature",
-    "migrate:down": "env-cmd prisma migrate down 1 --experimental",
-    "studio": "env-cmd prisma studio --experimental"
+    "lint": "eslint './src/**/*.{ts,tsx}' --quiet",
+    "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix",
+    "prettier": "prettier --check './src/**/*.{ts,tsx,json,md}'",
+    "prettier:fix": "prettier --write './src/**/*.{ts,tsx,json,md}'"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/withmoney/withmoney-api.git"
+    "url": "git+https://github.com/sort-tasks/sort-tasks-api.git"
   },
   "keywords": [
-    "withmoney",
+    "sort-tasks",
+    "todo",
     "api"
   ],
   "author": "David Costa <davidcostadev@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/withmoney/withmoney-api/issues"
+    "url": "https://github.com/sort-tasks/sort-tasks-api/issues"
   },
-  "homepage": "https://github.com/withmoney/withmoney-api#readme",
+  "homepage": "https://github.com/sort-tasks/sort-tasks-api#readme",
   "devDependencies": {
     "@types/bcryptjs": "2.4.4",
     "@types/graphql-iso-date": "^3.4.0",
     "@types/jest": "29.5.5",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
     "cors": "^2.8.5",
     "cross-env": "7.0.3",
     "dotenv": "16.3.1",
     "env-cmd": "^10.1.0",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
     "jest": "29.7.0",
     "nodemon": "3.0.1",
+    "prettier": "^3.0.3",
     "ts-jest": "29.1.1",
     "ts-node": "10.9.1",
     "ts-node-dev": "2.0.0",
