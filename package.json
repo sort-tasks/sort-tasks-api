@@ -1,0 +1,75 @@
+{
+  "name": "withmoney-api",
+  "version": "2.0.0",
+  "description": "withmoney backend project",
+  "main": "src/main.ts",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development env-cmd ts-node-dev --no-notify --respawn --transpile-only src/main.ts",
+    "start": "node dist/src/main",
+    "start:prod": "cross-env NODE_ENV=production npm start",
+    "clean": "rm -rf dist",
+    "build": "npm -s run clean && cp .env.example prisma/.env && tsc",
+    "build:only": "tsc",
+    "build:prod": "env-cmd tsc",
+    "heroku-postbuild": "npm -s run generate && prisma db push --preview-feature --force && npm run build",
+    "test": "jest",
+    "generate": "npm run generate:prisma && npm -s run generate:nexus",
+    "generate:prisma": "prisma generate",
+    "generate:nexus": "ts-node --transpile-only src/schema",
+    "migrate:save": "env-cmd prisma migrate dev --preview-feature",
+    "migrate:up": "env-cmd prisma db push --preview-feature",
+    "migrate:down": "env-cmd prisma migrate down 1 --experimental",
+    "studio": "env-cmd prisma studio --experimental"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withmoney/withmoney-api.git"
+  },
+  "keywords": [
+    "withmoney",
+    "api"
+  ],
+  "author": "David Costa <davidcostadev@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/withmoney/withmoney-api/issues"
+  },
+  "homepage": "https://github.com/withmoney/withmoney-api#readme",
+  "devDependencies": {
+    "@types/bcryptjs": "2.4.4",
+    "@types/graphql-iso-date": "^3.4.0",
+    "@types/jest": "29.5.5",
+    "cors": "^2.8.5",
+    "cross-env": "7.0.3",
+    "dotenv": "16.3.1",
+    "env-cmd": "^10.1.0",
+    "jest": "29.7.0",
+    "nodemon": "3.0.1",
+    "ts-jest": "29.1.1",
+    "ts-node": "10.9.1",
+    "ts-node-dev": "2.0.0",
+    "typescript": "5.2.2"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.9.3",
+    "@prisma/client": "5.3.1",
+    "@types/bcrypt": "5.0.0",
+    "@types/jsonwebtoken": "9.0.3",
+    "@types/nodemailer": "6.4.11",
+    "@types/uuid": "9.0.4",
+    "apollo-server": "3.12.1",
+    "apollo-server-testing": "2.25.3",
+    "bcrypt": "5.1.1",
+    "bcryptjs": "^2.4.3",
+    "express": "4.18.2",
+    "graphql": "16.8.1",
+    "graphql-iso-date": "^3.6.1",
+    "graphql-subscriptions": "2.0.0",
+    "jsonwebtoken": "9.0.2",
+    "nexus": "1.3.0",
+    "nexus-prisma": "^2.0.1",
+    "nodemailer": "6.9.5",
+    "prisma": "5.3.1",
+    "uuid": "9.0.1"
+  }
+}
