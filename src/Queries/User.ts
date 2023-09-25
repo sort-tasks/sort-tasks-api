@@ -1,7 +1,8 @@
-import { User } from 'nexus-prisma';
 import { queryField } from 'nexus';
 import { objectType } from 'nexus';
-import { getUserId } from '../utils/utils';
+import { User } from 'nexus-prisma';
+
+import { getUserId } from 'utils/utils';
 
 export const UserType = objectType({
   name: User.$name,

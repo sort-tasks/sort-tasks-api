@@ -1,9 +1,10 @@
 import { compare } from 'bcryptjs';
 import { hash } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import { APP_SECRET } from '../utils/utils';
-import { mutationField, nonNull, arg } from 'nexus';
+import { arg, mutationField, nonNull } from 'nexus';
 import { inputObjectType, objectType } from 'nexus';
+
+import { APP_SECRET } from 'utils/utils';
 
 export const RegisterInput = inputObjectType({
   name: 'RegisterInput',

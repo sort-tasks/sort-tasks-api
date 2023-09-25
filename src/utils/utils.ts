@@ -1,8 +1,8 @@
+import { User } from '@prisma/client';
 import { AuthenticationError } from 'apollo-server';
 import { verify } from 'jsonwebtoken';
-import { User } from '@prisma/client';
 
-import { Context } from '../context';
+import { Context } from 'context';
 
 const { SECRET_KEY } = process.env;
 export const APP_SECRET = SECRET_KEY || 'secret';

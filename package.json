@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/sort-tasks/sort-tasks-api#readme",
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.2.0",
     "@types/bcryptjs": "2.4.4",
     "@types/graphql-iso-date": "^3.4.0",
     "@types/jest": "29.5.5",

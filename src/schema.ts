@@ -1,19 +1,17 @@
-import * as path from 'path';
-import NexusPrismaScalars from 'nexus-prisma/scalars';
 import { GraphQLScalarType } from 'graphql';
-import { makeSchema, asNexusMethod, scalarType } from 'nexus';
-
 import { GraphQLUUID } from 'graphql-scalars';
+import { DateTimeResolver } from 'graphql-scalars';
+import { asNexusMethod, makeSchema, scalarType } from 'nexus';
+import NexusPrismaScalars from 'nexus-prisma/scalars';
+import * as path from 'path';
+
+import * as Mutations from './Mutations/Auth';
+import * as Queries from './Queries';
 
 const UUID = scalarType({
   ...GraphQLUUID,
   name: 'UUID', // You can rename it if you wish
 });
-
-import { DateTimeResolver } from 'graphql-scalars';
-
-import * as Queries from './Queries';
-import * as Mutations from './Mutations/Auth';
 
 const dateTimeScalar = new GraphQLScalarType(DateTimeResolver);
 

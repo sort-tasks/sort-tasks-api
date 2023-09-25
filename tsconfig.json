@@ -9,7 +9,8 @@
     "strict": true,
     "target": "esnext",
     "typeRoots": ["node_modules/@types", "types"],
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "baseUrl": "src"
   },
   "include": ["**/*.ts", "**/*.tsx", ".", "types.d.ts"],
   "exclude": ["./node_modules", "./tests", "./dist"]
