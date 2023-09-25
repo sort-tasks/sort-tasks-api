@@ -33,11 +33,16 @@ input RegisterInput {
   password: String!
 }
 
+"""
+A field whose value is a generic Universally Unique Identifier: https://en.wikipedia.org/wiki/Universally_unique_identifier.
+"""
+scalar UUID
+
 type User {
   createdAt: DateTime!
   email: String!
   firstName: String!
-  id: ID!
+  id: UUID
   lastName: String!
   updatedAt: DateTime!
 }

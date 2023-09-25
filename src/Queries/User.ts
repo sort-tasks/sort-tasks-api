@@ -1,12 +1,15 @@
 import { User, } from 'nexus-prisma'
 import {queryField} from "nexus"
 import {objectType} from "nexus"
+import {getUserId} from "../utils/utils"
+
+
 
 export const UserType = objectType({
   name: User.$name,
   description: User.$description,
   definition(t) {
-      t.field(User.id)
+      t.field('id', { type: 'UUID'})
       t.field(User.email)
       t.field(User.firstName)
       t.field(User.lastName)
@@ -19,6 +22,7 @@ export const UserType = objectType({
 export const meQuery = queryField('me', {
   type: 'User',
   resolve: async (parent, args, ctx) => {
-      return null
+    const user = await getUserId(ctx);
+    return user
   },
 });

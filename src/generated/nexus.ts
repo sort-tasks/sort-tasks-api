@@ -51,6 +51,7 @@ export interface NexusGenScalars {
   Boolean: boolean
   ID: string
   DateTime: any
+  UUID: any
 }
 
 export interface NexusGenObjects {
@@ -64,7 +65,7 @@ export interface NexusGenObjects {
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
     firstName: string; // String!
-    id: string; // ID!
+    id?: NexusGenScalars['UUID'] | null; // UUID
     lastName: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
@@ -96,7 +97,7 @@ export interface NexusGenFieldTypes {
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
     firstName: string; // String!
-    id: string; // ID!
+    id: NexusGenScalars['UUID'] | null; // UUID
     lastName: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
@@ -118,7 +119,7 @@ export interface NexusGenFieldTypeNames {
     createdAt: 'DateTime'
     email: 'String'
     firstName: 'String'
-    id: 'ID'
+    id: 'UUID'
     lastName: 'String'
     updatedAt: 'DateTime'
   }
