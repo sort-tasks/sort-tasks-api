@@ -4,7 +4,7 @@
   "description": "sort tasks backend project",
   "main": "src/main.ts",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development env-cmd ts-node-dev --no-notify --respawn --transpile-only src/main.ts",
+    "dev": "cross-env NODE_ENV=development cross-env NODE_PATH=./src env-cmd ts-node-dev --no-notify --respawn --transpile-only src/main.ts",
     "lint": "eslint './src/**/*.{ts,tsx}' --quiet",
     "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix",
     "prettier": "prettier --check './src/**/*.{ts,tsx,json,md}'",

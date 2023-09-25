@@ -5,8 +5,10 @@ import { asNexusMethod, makeSchema, scalarType } from 'nexus';
 import NexusPrismaScalars from 'nexus-prisma/scalars';
 import * as path from 'path';
 
-import * as Mutations from './Mutations/Auth';
+import * as Mutations from './Mutations';
 import * as Queries from './Queries';
+import * as inputs from './inputs';
+import * as tasks from './types';
 
 const UUID = scalarType({
   ...GraphQLUUID,
@@ -22,6 +24,8 @@ export const schema = makeSchema({
     asNexusMethod(dateTimeScalar, 'dateTime'),
     ...Object.values(Queries),
     ...Object.values(Mutations),
+    ...Object.values(inputs),
+    ...Object.values(tasks),
   ],
   outputs: {
     schema: path.join(__dirname, './../schema.graphql'),

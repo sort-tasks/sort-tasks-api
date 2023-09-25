@@ -7,6 +7,26 @@ type AuthPayload {
   user: User!
 }
 
+type CategoriesResult {
+  data: [Category]
+  pagination: Pagination
+}
+
+type Category {
+  createdAt: DateTime!
+  id: UUID
+  name: String!
+  updatedAt: DateTime!
+}
+
+input CategoryCreateInput {
+  name: String!
+}
+
+input CategoryUpdateInput {
+  name: String!
+}
+
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
@@ -18,11 +38,19 @@ input LoginInput {
 }
 
 type Mutation {
+  createOneCategory(input: CategoryCreateInput!): Category!
+  createOneTask(input: TaskCreateInput!): Task!
   login(input: LoginInput!): AuthPayload
   register(input: RegisterInput!): String
 }
 
+type Pagination {
+  totalItems: Int
+}
+
 type Query {
+  findManyCategory(skip: Int, take: Int): CategoriesResult!
+  findManyTask(skip: Int, take: Int): TasksResult!
   me: User
 }
 
@@ -31,6 +59,26 @@ input RegisterInput {
   firstName: String!
   lastName: String!
   password: String!
+}
+
+type Task {
+  categoryId: UUID
+  createdAt: DateTime!
+  description: String
+  id: UUID
+  name: String!
+  updatedAt: DateTime!
+}
+
+input TaskCreateInput {
+  categoryId: UUID
+  description: String
+  name: String!
+}
+
+type TasksResult {
+  data: [Task]
+  pagination: Pagination
 }
 
 """
