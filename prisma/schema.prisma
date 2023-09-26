@@ -24,7 +24,7 @@ model User {
   updatedAt            DateTime   @default(now()) @updatedAt
   deletedAt            DateTime?
   categories           Category[]
-  Task                 Task[]
+  tasks                Task[]
 }
 
 model Task {
@@ -49,5 +49,5 @@ model Category {
   updatedAt DateTime  @default(now()) @updatedAt
   deletedAt DateTime?
   user      User      @relation(fields: [userId], references: [id])
-  Task      Task[]
+  tasks     Task[]
 }

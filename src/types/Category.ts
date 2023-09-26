@@ -12,18 +12,17 @@ export const CategoryType = objectType({
   },
 });
 
+export const CategoryResult = objectType({
+  name: 'CategoryResult',
+  definition(t) {
+    t.field('data', { type: 'Category' });
+  },
+});
+
 export const CategoriesResult = objectType({
   name: 'CategoriesResult',
   definition(t) {
     t.list.field('data', { type: 'Category' });
-    t.field('pagination', { type: 'Pagination' });
-  },
-});
-
-export const TasksResult = objectType({
-  name: 'TasksResult',
-  definition(t) {
-    t.list.field('data', { type: 'Task' });
     t.field('pagination', { type: 'Pagination' });
   },
 });

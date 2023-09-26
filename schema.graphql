@@ -23,6 +23,10 @@ input CategoryCreateInput {
   name: String!
 }
 
+type CategoryResult {
+  data: Category
+}
+
 input CategoryUpdateInput {
   name: String!
 }
@@ -62,6 +66,7 @@ input RegisterInput {
 }
 
 type Task {
+  category: CategoryResult
   categoryId: UUID
   createdAt: DateTime!
   description: String
@@ -89,10 +94,12 @@ A field whose value is a generic Universally Unique Identifier: https://en.wikip
 scalar UUID
 
 type User {
+  categories: CategoriesResult
   createdAt: DateTime!
   email: String!
   firstName: String!
   id: UUID
   lastName: String!
+  tasks: TasksResult
   updatedAt: DateTime!
 }

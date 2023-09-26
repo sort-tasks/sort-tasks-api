@@ -81,6 +81,9 @@ export interface NexusGenObjects {
     name: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
+  CategoryResult: { // root type
+    data?: NexusGenRootTypes['Category'] | null; // Category
+  }
   Mutation: {};
   Pagination: { // root type
     totalItems?: number | null; // Int
@@ -134,6 +137,9 @@ export interface NexusGenFieldTypes {
     name: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
+  CategoryResult: { // field return type
+    data: NexusGenRootTypes['Category'] | null; // Category
+  }
   Mutation: { // field return type
     createOneCategory: NexusGenRootTypes['Category']; // Category!
     createOneTask: NexusGenRootTypes['Task']; // Task!
@@ -149,6 +155,7 @@ export interface NexusGenFieldTypes {
     me: NexusGenRootTypes['User'] | null; // User
   }
   Task: { // field return type
+    category: NexusGenRootTypes['CategoryResult'] | null; // CategoryResult
     categoryId: NexusGenScalars['UUID'] | null; // UUID
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string | null; // String
@@ -162,11 +169,13 @@ export interface NexusGenFieldTypes {
     pagination: NexusGenRootTypes['Pagination'] | null; // Pagination
   }
   User: { // field return type
+    categories: NexusGenRootTypes['CategoriesResult'] | null; // CategoriesResult
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
     firstName: string; // String!
     id: NexusGenScalars['UUID'] | null; // UUID
     lastName: string; // String!
+    tasks: NexusGenRootTypes['TasksResult'] | null; // TasksResult
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
 }
@@ -186,6 +195,9 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
     updatedAt: 'DateTime'
   }
+  CategoryResult: { // field return type name
+    data: 'Category'
+  }
   Mutation: { // field return type name
     createOneCategory: 'Category'
     createOneTask: 'Task'
@@ -201,6 +213,7 @@ export interface NexusGenFieldTypeNames {
     me: 'User'
   }
   Task: { // field return type name
+    category: 'CategoryResult'
     categoryId: 'UUID'
     createdAt: 'DateTime'
     description: 'String'
@@ -214,11 +227,13 @@ export interface NexusGenFieldTypeNames {
     pagination: 'Pagination'
   }
   User: { // field return type name
+    categories: 'CategoriesResult'
     createdAt: 'DateTime'
     email: 'String'
     firstName: 'String'
     id: 'UUID'
     lastName: 'String'
+    tasks: 'TasksResult'
     updatedAt: 'DateTime'
   }
 }

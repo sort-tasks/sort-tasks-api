@@ -14,6 +14,38 @@ export const UserType = objectType({
     t.field(User.lastName);
     t.field(User.createdAt);
     t.field(User.updatedAt);
+    t.field('tasks', {
+      type: 'TasksResult',
+      resolve: async (parent, args, ctx) => {
+        const data = await ctx.prisma.task.findMany({
+          where: { userId: parent.id },
+        });
+        const totalItems = await ctx.prisma.task.count({ where: { userId: parent.id } });
+
+        return {
+          data,
+          pagination: {
+            totalItems,
+          },
+        };
+      },
+    });
+    t.field('categories', {
+      type: 'CategoriesResult',
+      resolve: async (parent, args, ctx) => {
+        const data = await ctx.prisma.category.findMany({
+          where: { userId: parent.id },
+        });
+        const totalItems = await ctx.prisma.category.count({ where: { userId: parent.id } });
+
+        return {
+          data,
+          pagination: {
+            totalItems,
+          },
+        };
+      },
+    });
   },
 });
 
