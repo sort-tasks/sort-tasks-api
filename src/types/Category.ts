@@ -7,6 +7,8 @@ export const CategoryType = objectType({
   definition(t) {
     t.field('id', { type: nonNull('UUID') });
     t.field(Category.name);
+    t.field(Category.description);
+    t.field(Category.ordering);
     t.field(Category.createdAt);
     t.field(Category.updatedAt);
   },

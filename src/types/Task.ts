@@ -6,10 +6,11 @@ export const TaskType = objectType({
   description: Task.$description,
   definition(t) {
     t.field('id', { type: nonNull('UUID') });
-    t.field(Task.name);
+    t.field(Task.title);
     t.field('categoryId', { type: nonNull('UUID') });
     t.field(Task.description);
     t.field(Task.isCompleted);
+    t.field(Task.completedAt);
     t.field(Task.createdAt);
     t.field(Task.updatedAt);
     t.field('category', {

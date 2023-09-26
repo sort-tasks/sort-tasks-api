@@ -21,13 +21,17 @@ input AuthRegisterInput {
 
 type Category {
   createdAt: DateTime!
+  description: String
   id: UUID!
   name: String!
+  ordering: Int!
   updatedAt: DateTime!
 }
 
 input CategoryCreateInput {
+  description: String
   name: String!
+  ordering: Int!
 }
 
 type CategoryListResult {
@@ -40,7 +44,9 @@ type CategorySingleResult {
 }
 
 input CategoryUpdateInput {
+  description: String
   name: String!
+  ordering: Int!
 }
 
 """
@@ -70,19 +76,21 @@ type Query {
 type Task {
   category: CategorySingleResult!
   categoryId: UUID!
+  completedAt: DateTime
   createdAt: DateTime!
   description: String
   id: UUID!
   isCompleted: Boolean!
-  name: String!
+  title: String!
   updatedAt: DateTime!
 }
 
 input TaskCreateInput {
   categoryId: UUID!
+  completedAt: DateTime
   description: String
   isCompleted: Boolean
-  name: String!
+  title: String!
 }
 
 type TaskListResult {
@@ -92,9 +100,10 @@ type TaskListResult {
 
 input TaskUpdateInput {
   categoryId: UUID!
+  completedAt: DateTime
   description: String
   isCompleted: Boolean
-  name: String!
+  title: String!
 }
 
 """

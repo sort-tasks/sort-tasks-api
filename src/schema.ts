@@ -13,6 +13,7 @@ import * as tasks from './types';
 const UUID = scalarType({
   ...GraphQLUUID,
   name: 'UUID', // You can rename it if you wish
+  sourceType: 'string',
 });
 
 const dateTimeScalar = new GraphQLScalarType(DateTimeResolver);
@@ -21,7 +22,7 @@ export const schema = makeSchema({
   types: [
     NexusPrismaScalars,
     UUID,
-    asNexusMethod(dateTimeScalar, 'dateTime'),
+    asNexusMethod(dateTimeScalar, 'dateTime', 'string | Date'),
     ...Object.values(Queries),
     ...Object.values(Mutations),
     ...Object.values(inputs),

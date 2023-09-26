@@ -40,22 +40,28 @@ export interface NexusGenInputs {
     password: string; // String!
   }
   CategoryCreateInput: { // input type
+    description?: string | null; // String
     name: string; // String!
+    ordering: number; // Int!
   }
   CategoryUpdateInput: { // input type
+    description?: string | null; // String
     name: string; // String!
+    ordering: number; // Int!
   }
   TaskCreateInput: { // input type
     categoryId: NexusGenScalars['UUID']; // UUID!
+    completedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
     isCompleted?: boolean | null; // Boolean
-    name: string; // String!
+    title: string; // String!
   }
   TaskUpdateInput: { // input type
     categoryId: NexusGenScalars['UUID']; // UUID!
+    completedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
     isCompleted?: boolean | null; // Boolean
-    name: string; // String!
+    title: string; // String!
   }
 }
 
@@ -68,8 +74,8 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
-  DateTime: any
-  UUID: any
+  DateTime: string | Date
+  UUID: string
 }
 
 export interface NexusGenObjects {
@@ -79,8 +85,10 @@ export interface NexusGenObjects {
   }
   Category: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
+    description?: string | null; // String
     id: NexusGenScalars['UUID']; // UUID!
     name: string; // String!
+    ordering: number; // Int!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   CategoryListResult: { // root type
@@ -97,11 +105,12 @@ export interface NexusGenObjects {
   Query: {};
   Task: { // root type
     categoryId: NexusGenScalars['UUID']; // UUID!
+    completedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description?: string | null; // String
     id: NexusGenScalars['UUID']; // UUID!
     isCompleted: boolean; // Boolean!
-    name: string; // String!
+    title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   TaskListResult: { // root type
@@ -135,8 +144,10 @@ export interface NexusGenFieldTypes {
   }
   Category: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
+    description: string | null; // String
     id: NexusGenScalars['UUID']; // UUID!
     name: string; // String!
+    ordering: number; // Int!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   CategoryListResult: { // field return type
@@ -165,11 +176,12 @@ export interface NexusGenFieldTypes {
   Task: { // field return type
     category: NexusGenRootTypes['CategorySingleResult']; // CategorySingleResult!
     categoryId: NexusGenScalars['UUID']; // UUID!
+    completedAt: NexusGenScalars['DateTime'] | null; // DateTime
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string | null; // String
     id: NexusGenScalars['UUID']; // UUID!
     isCompleted: boolean; // Boolean!
-    name: string; // String!
+    title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   TaskListResult: { // field return type
@@ -195,8 +207,10 @@ export interface NexusGenFieldTypeNames {
   }
   Category: { // field return type name
     createdAt: 'DateTime'
+    description: 'String'
     id: 'UUID'
     name: 'String'
+    ordering: 'Int'
     updatedAt: 'DateTime'
   }
   CategoryListResult: { // field return type name
@@ -225,11 +239,12 @@ export interface NexusGenFieldTypeNames {
   Task: { // field return type name
     category: 'CategorySingleResult'
     categoryId: 'UUID'
+    completedAt: 'DateTime'
     createdAt: 'DateTime'
     description: 'String'
     id: 'UUID'
     isCompleted: 'Boolean'
-    name: 'String'
+    title: 'String'
     updatedAt: 'DateTime'
   }
   TaskListResult: { // field return type name

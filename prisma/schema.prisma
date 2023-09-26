@@ -31,9 +31,10 @@ model Task {
   id          String    @id @default(uuid())
   userId      String
   categoryId  String
-  name        String
+  title       String
   isCompleted Boolean   @default(false)
   description String?
+  completedAt DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @default(now()) @updatedAt
   deletedAt   DateTime?
@@ -42,12 +43,16 @@ model Task {
 }
 
 model Category {
-  id        String    @id @default(uuid())
-  userId    String
-  name      String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @default(now()) @updatedAt
-  deletedAt DateTime?
-  user      User      @relation(fields: [userId], references: [id])
-  tasks     Task[]
+  id          String    @id @default(uuid())
+  userId      String
+  name        String
+  description String?
+  ordering    Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+  deletedAt   DateTime?
+  user        User      @relation(fields: [userId], references: [id])
+  tasks       Task[]
+
+  @@unique([userId, ordering])
 }
