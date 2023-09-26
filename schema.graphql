@@ -21,7 +21,7 @@ input AuthRegisterInput {
 
 type Category {
   createdAt: DateTime!
-  id: UUID
+  id: UUID!
   name: String!
   updatedAt: DateTime!
 }
@@ -31,8 +31,8 @@ input CategoryCreateInput {
 }
 
 type CategoryListResult {
-  data: [Category]
-  pagination: Pagination
+  data: [Category!]
+  pagination: Pagination!
 }
 
 type CategorySingleResult {
@@ -68,11 +68,11 @@ type Query {
 }
 
 type Task {
-  category: CategorySingleResult
-  categoryId: UUID
+  category: CategorySingleResult!
+  categoryId: UUID!
   createdAt: DateTime!
   description: String
-  id: UUID
+  id: UUID!
   isCompleted: Boolean!
   name: String!
   updatedAt: DateTime!
@@ -86,8 +86,8 @@ input TaskCreateInput {
 }
 
 type TaskListResult {
-  data: [Task]
-  pagination: Pagination
+  data: [Task!]
+  pagination: Pagination!
 }
 
 input TaskUpdateInput {

@@ -79,13 +79,13 @@ export interface NexusGenObjects {
   }
   Category: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
-    id?: NexusGenScalars['UUID'] | null; // UUID
+    id: NexusGenScalars['UUID']; // UUID!
     name: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   CategoryListResult: { // root type
-    data?: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
-    pagination?: NexusGenRootTypes['Pagination'] | null; // Pagination
+    data?: NexusGenRootTypes['Category'][] | null; // [Category!]
+    pagination: NexusGenRootTypes['Pagination']; // Pagination!
   }
   CategorySingleResult: { // root type
     data?: NexusGenRootTypes['Category'] | null; // Category
@@ -96,17 +96,17 @@ export interface NexusGenObjects {
   }
   Query: {};
   Task: { // root type
-    categoryId?: NexusGenScalars['UUID'] | null; // UUID
+    categoryId: NexusGenScalars['UUID']; // UUID!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description?: string | null; // String
-    id?: NexusGenScalars['UUID'] | null; // UUID
+    id: NexusGenScalars['UUID']; // UUID!
     isCompleted: boolean; // Boolean!
     name: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   TaskListResult: { // root type
-    data?: Array<NexusGenRootTypes['Task'] | null> | null; // [Task]
-    pagination?: NexusGenRootTypes['Pagination'] | null; // Pagination
+    data?: NexusGenRootTypes['Task'][] | null; // [Task!]
+    pagination: NexusGenRootTypes['Pagination']; // Pagination!
   }
   User: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -135,13 +135,13 @@ export interface NexusGenFieldTypes {
   }
   Category: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
-    id: NexusGenScalars['UUID'] | null; // UUID
+    id: NexusGenScalars['UUID']; // UUID!
     name: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   CategoryListResult: { // field return type
-    data: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
-    pagination: NexusGenRootTypes['Pagination'] | null; // Pagination
+    data: NexusGenRootTypes['Category'][] | null; // [Category!]
+    pagination: NexusGenRootTypes['Pagination']; // Pagination!
   }
   CategorySingleResult: { // field return type
     data: NexusGenRootTypes['Category'] | null; // Category
@@ -163,18 +163,18 @@ export interface NexusGenFieldTypes {
     me: NexusGenRootTypes['User'] | null; // User
   }
   Task: { // field return type
-    category: NexusGenRootTypes['CategorySingleResult'] | null; // CategorySingleResult
-    categoryId: NexusGenScalars['UUID'] | null; // UUID
+    category: NexusGenRootTypes['CategorySingleResult']; // CategorySingleResult!
+    categoryId: NexusGenScalars['UUID']; // UUID!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string | null; // String
-    id: NexusGenScalars['UUID'] | null; // UUID
+    id: NexusGenScalars['UUID']; // UUID!
     isCompleted: boolean; // Boolean!
     name: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   TaskListResult: { // field return type
-    data: Array<NexusGenRootTypes['Task'] | null> | null; // [Task]
-    pagination: NexusGenRootTypes['Pagination'] | null; // Pagination
+    data: NexusGenRootTypes['Task'][] | null; // [Task!]
+    pagination: NexusGenRootTypes['Pagination']; // Pagination!
   }
   User: { // field return type
     categories: NexusGenRootTypes['CategoryListResult'] | null; // CategoryListResult
