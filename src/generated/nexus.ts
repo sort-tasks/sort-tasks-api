@@ -172,6 +172,7 @@ export interface NexusGenFieldTypes {
     findManyCategory: NexusGenRootTypes['CategoryListResult']; // CategoryListResult!
     findManyTask: NexusGenRootTypes['TaskListResult']; // TaskListResult!
     me: NexusGenRootTypes['User'] | null; // User
+    orderedTasksByCategory: NexusGenRootTypes['TaskListResult']; // TaskListResult!
   }
   Task: { // field return type
     category: NexusGenRootTypes['CategorySingleResult']; // CategorySingleResult!
@@ -235,6 +236,7 @@ export interface NexusGenFieldTypeNames {
     findManyCategory: 'CategoryListResult'
     findManyTask: 'TaskListResult'
     me: 'User'
+    orderedTasksByCategory: 'TaskListResult'
   }
   Task: { // field return type name
     category: 'CategorySingleResult'

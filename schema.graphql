@@ -71,6 +71,7 @@ type Query {
   findManyCategory(skip: Int, take: Int): CategoryListResult!
   findManyTask(skip: Int, take: Int): TaskListResult!
   me: User
+  orderedTasksByCategory: TaskListResult!
 }
 
 type Task {

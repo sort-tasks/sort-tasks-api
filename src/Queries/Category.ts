@@ -33,6 +33,9 @@ export const CategoryFindManyQuery = queryField('findManyCategory', {
         // ...where,
         userId: userId.id,
       },
+      orderBy: {
+        name: 'asc',
+      },
     });
 
     const pagination = {

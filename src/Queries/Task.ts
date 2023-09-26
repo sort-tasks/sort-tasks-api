@@ -2,6 +2,43 @@ import { nonNull, queryField } from 'nexus';
 
 import { getUserId } from 'utils/utils';
 
+export const OrderedTasksByCategory = queryField('orderedTasksByCategory', {
+  type: nonNull('TaskListResult'),
+  resolve: async (_parent, _args, ctx) => {
+    const user = await getUserId(ctx);
+
+    const data = await ctx.prisma.task.findMany({
+      include: {
+        category: true, // Include the related Category model
+      },
+      where: {
+        userId: user.id,
+      },
+      orderBy: [
+        {
+          category: {
+            ordering: 'asc', // Order by Category.ordering in ascending order
+          },
+        },
+        {
+          createdAt: 'asc', // Additional sorting, e.g., by task creation date
+        },
+      ],
+    });
+
+    const pagination = {
+      totalItems: await ctx.prisma.task.count({
+        where: {
+          // ...where,
+          userId: user.id,
+        },
+      }),
+    };
+
+    return { data, pagination };
+  },
+});
+
 export const TaskFindManyQuery = queryField('findManyTask', {
   type: nonNull('TaskListResult'),
   args: {
