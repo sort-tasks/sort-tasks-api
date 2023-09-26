@@ -2,7 +2,7 @@ import { arg, mutationField, nonNull } from 'nexus';
 
 import { getUserId } from 'utils/utils';
 
-export const TaskCreateOneMutation = mutationField('createOneTask', {
+export const TaskCreateMutation = mutationField('taskCreate', {
   type: nonNull('Task'),
   args: {
     input: nonNull(
@@ -24,7 +24,7 @@ export const TaskCreateOneMutation = mutationField('createOneTask', {
   },
 });
 
-export const TaskUpdateInput = mutationField('updateOneTask', {
+export const TaskUpdateInput = mutationField('taskUpdate', {
   type: nonNull('Task'),
   args: {
     id: nonNull(arg({ type: 'UUID' })),
@@ -44,7 +44,7 @@ export const TaskUpdateInput = mutationField('updateOneTask', {
   },
 });
 
-export const TaskDeleteOneMutation = mutationField('deleteOneTask', {
+export const TaskDeleteMutation = mutationField('taskDelete', {
   type: nonNull('Task'),
   args: {
     id: nonNull(arg({ type: 'UUID' })),

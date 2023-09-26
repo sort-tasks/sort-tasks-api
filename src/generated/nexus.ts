@@ -29,21 +29,21 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  AuthLoginInput: { // input type
+    email: string; // String!
+    password: string; // String!
+  }
+  AuthRegisterInput: { // input type
+    email: string; // String!
+    firstName: string; // String!
+    lastName: string; // String!
+    password: string; // String!
+  }
   CategoryCreateInput: { // input type
     name: string; // String!
   }
   CategoryUpdateInput: { // input type
     name: string; // String!
-  }
-  LoginInput: { // input type
-    email: string; // String!
-    password: string; // String!
-  }
-  RegisterInput: { // input type
-    email: string; // String!
-    firstName: string; // String!
-    lastName: string; // String!
-    password: string; // String!
   }
   TaskCreateInput: { // input type
     categoryId: NexusGenScalars['UUID']; // UUID!
@@ -73,13 +73,9 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
-  AuthPayload: { // root type
+  AuthLoginResult: { // root type
     token: string; // String!
     user: NexusGenRootTypes['User']; // User!
-  }
-  CategoriesResult: { // root type
-    data?: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
-    pagination?: NexusGenRootTypes['Pagination'] | null; // Pagination
   }
   Category: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -87,7 +83,11 @@ export interface NexusGenObjects {
     name: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
-  CategoryResult: { // root type
+  CategoryListResult: { // root type
+    data?: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
+    pagination?: NexusGenRootTypes['Pagination'] | null; // Pagination
+  }
+  CategorySingleResult: { // root type
     data?: NexusGenRootTypes['Category'] | null; // Category
   }
   Mutation: {};
@@ -104,7 +104,7 @@ export interface NexusGenObjects {
     name: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
-  TasksResult: { // root type
+  TaskListResult: { // root type
     data?: Array<NexusGenRootTypes['Task'] | null> | null; // [Task]
     pagination?: NexusGenRootTypes['Pagination'] | null; // Pagination
   }
@@ -129,13 +129,9 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
-  AuthPayload: { // field return type
+  AuthLoginResult: { // field return type
     token: string; // String!
     user: NexusGenRootTypes['User']; // User!
-  }
-  CategoriesResult: { // field return type
-    data: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
-    pagination: NexusGenRootTypes['Pagination'] | null; // Pagination
   }
   Category: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -143,27 +139,31 @@ export interface NexusGenFieldTypes {
     name: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
-  CategoryResult: { // field return type
+  CategoryListResult: { // field return type
+    data: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
+    pagination: NexusGenRootTypes['Pagination'] | null; // Pagination
+  }
+  CategorySingleResult: { // field return type
     data: NexusGenRootTypes['Category'] | null; // Category
   }
   Mutation: { // field return type
-    createOneCategory: NexusGenRootTypes['Category']; // Category!
-    createOneTask: NexusGenRootTypes['Task']; // Task!
-    deleteOneTask: NexusGenRootTypes['Task']; // Task!
-    login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
-    register: string | null; // String
-    updateOneTask: NexusGenRootTypes['Task']; // Task!
+    authLogin: NexusGenRootTypes['AuthLoginResult'] | null; // AuthLoginResult
+    authRegister: string | null; // String
+    categoryCreate: NexusGenRootTypes['Category']; // Category!
+    taskCreate: NexusGenRootTypes['Task']; // Task!
+    taskDelete: NexusGenRootTypes['Task']; // Task!
+    taskUpdate: NexusGenRootTypes['Task']; // Task!
   }
   Pagination: { // field return type
     totalItems: number | null; // Int
   }
   Query: { // field return type
-    findManyCategory: NexusGenRootTypes['CategoriesResult']; // CategoriesResult!
-    findManyTask: NexusGenRootTypes['TasksResult']; // TasksResult!
+    findManyCategory: NexusGenRootTypes['CategoryListResult']; // CategoryListResult!
+    findManyTask: NexusGenRootTypes['TaskListResult']; // TaskListResult!
     me: NexusGenRootTypes['User'] | null; // User
   }
   Task: { // field return type
-    category: NexusGenRootTypes['CategoryResult'] | null; // CategoryResult
+    category: NexusGenRootTypes['CategorySingleResult'] | null; // CategorySingleResult
     categoryId: NexusGenScalars['UUID'] | null; // UUID
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string | null; // String
@@ -172,30 +172,26 @@ export interface NexusGenFieldTypes {
     name: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
-  TasksResult: { // field return type
+  TaskListResult: { // field return type
     data: Array<NexusGenRootTypes['Task'] | null> | null; // [Task]
     pagination: NexusGenRootTypes['Pagination'] | null; // Pagination
   }
   User: { // field return type
-    categories: NexusGenRootTypes['CategoriesResult'] | null; // CategoriesResult
+    categories: NexusGenRootTypes['CategoryListResult'] | null; // CategoryListResult
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
     firstName: string; // String!
     id: NexusGenScalars['UUID'] | null; // UUID
     lastName: string; // String!
-    tasks: NexusGenRootTypes['TasksResult'] | null; // TasksResult
+    tasks: NexusGenRootTypes['TaskListResult'] | null; // TaskListResult
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
 }
 
 export interface NexusGenFieldTypeNames {
-  AuthPayload: { // field return type name
+  AuthLoginResult: { // field return type name
     token: 'String'
     user: 'User'
-  }
-  CategoriesResult: { // field return type name
-    data: 'Category'
-    pagination: 'Pagination'
   }
   Category: { // field return type name
     createdAt: 'DateTime'
@@ -203,27 +199,31 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
     updatedAt: 'DateTime'
   }
-  CategoryResult: { // field return type name
+  CategoryListResult: { // field return type name
+    data: 'Category'
+    pagination: 'Pagination'
+  }
+  CategorySingleResult: { // field return type name
     data: 'Category'
   }
   Mutation: { // field return type name
-    createOneCategory: 'Category'
-    createOneTask: 'Task'
-    deleteOneTask: 'Task'
-    login: 'AuthPayload'
-    register: 'String'
-    updateOneTask: 'Task'
+    authLogin: 'AuthLoginResult'
+    authRegister: 'String'
+    categoryCreate: 'Category'
+    taskCreate: 'Task'
+    taskDelete: 'Task'
+    taskUpdate: 'Task'
   }
   Pagination: { // field return type name
     totalItems: 'Int'
   }
   Query: { // field return type name
-    findManyCategory: 'CategoriesResult'
-    findManyTask: 'TasksResult'
+    findManyCategory: 'CategoryListResult'
+    findManyTask: 'TaskListResult'
     me: 'User'
   }
   Task: { // field return type name
-    category: 'CategoryResult'
+    category: 'CategorySingleResult'
     categoryId: 'UUID'
     createdAt: 'DateTime'
     description: 'String'
@@ -232,40 +232,40 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
     updatedAt: 'DateTime'
   }
-  TasksResult: { // field return type name
+  TaskListResult: { // field return type name
     data: 'Task'
     pagination: 'Pagination'
   }
   User: { // field return type name
-    categories: 'CategoriesResult'
+    categories: 'CategoryListResult'
     createdAt: 'DateTime'
     email: 'String'
     firstName: 'String'
     id: 'UUID'
     lastName: 'String'
-    tasks: 'TasksResult'
+    tasks: 'TaskListResult'
     updatedAt: 'DateTime'
   }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
-    createOneCategory: { // args
+    authLogin: { // args
+      input: NexusGenInputs['AuthLoginInput']; // AuthLoginInput!
+    }
+    authRegister: { // args
+      input: NexusGenInputs['AuthRegisterInput']; // AuthRegisterInput!
+    }
+    categoryCreate: { // args
       input: NexusGenInputs['CategoryCreateInput']; // CategoryCreateInput!
     }
-    createOneTask: { // args
+    taskCreate: { // args
       input: NexusGenInputs['TaskCreateInput']; // TaskCreateInput!
     }
-    deleteOneTask: { // args
+    taskDelete: { // args
       id: NexusGenScalars['UUID']; // UUID!
     }
-    login: { // args
-      input: NexusGenInputs['LoginInput']; // LoginInput!
-    }
-    register: { // args
-      input: NexusGenInputs['RegisterInput']; // RegisterInput!
-    }
-    updateOneTask: { // args
+    taskUpdate: { // args
       id: NexusGenScalars['UUID']; // UUID!
       input: NexusGenInputs['TaskUpdateInput']; // TaskUpdateInput!
     }

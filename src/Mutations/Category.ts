@@ -2,7 +2,7 @@ import { arg, mutationField, nonNull } from 'nexus';
 
 import { getUserId } from 'utils/utils';
 
-export const CategoryCreateOneMutation = mutationField('createOneCategory', {
+export const CategoryCreateMutation = mutationField('categoryCreate', {
   type: nonNull('Category'),
   args: {
     input: nonNull(

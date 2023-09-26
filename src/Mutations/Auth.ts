@@ -2,42 +2,13 @@ import { compare } from 'bcryptjs';
 import { hash } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import { arg, mutationField, nonNull } from 'nexus';
-import { inputObjectType, objectType } from 'nexus';
 
 import { APP_SECRET } from 'utils/utils';
 
-export const RegisterInput = inputObjectType({
-  name: 'RegisterInput',
-  definition(t) {
-    t.nonNull.string('firstName');
-    t.nonNull.string('lastName');
-    t.nonNull.string('email');
-    t.nonNull.string('password');
-    t.nonNull.string('firstName');
-    t.nonNull.string('lastName');
-  },
-});
-
-export const LoginInput = inputObjectType({
-  name: 'LoginInput',
-  definition(t) {
-    t.nonNull.string('email');
-    t.nonNull.string('password');
-  },
-});
-
-export const AuthPayload = objectType({
-  name: 'AuthPayload',
-  definition(t) {
-    t.nonNull.string('token');
-    t.nonNull.field('user', { type: 'User' });
-  },
-});
-
-export const registerMutation = mutationField('register', {
+export const AuthRegisterMutation = mutationField('authRegister', {
   type: 'String',
   args: {
-    input: nonNull(arg({ type: 'RegisterInput' })),
+    input: nonNull(arg({ type: 'AuthRegisterInput' })),
   },
   resolve: async (_parent, { input: { password, email, firstName, lastName } }, ctx) => {
     const hashedPassword = await hash(password, 10);
@@ -66,10 +37,10 @@ export const registerMutation = mutationField('register', {
   },
 });
 
-export const loginMutation = mutationField('login', {
-  type: 'AuthPayload',
+export const AuthLoginMutation = mutationField('authLogin', {
+  type: 'AuthLoginResult',
   args: {
-    input: nonNull(arg({ type: 'LoginInput' })),
+    input: nonNull(arg({ type: 'AuthLoginInput' })),
   },
   resolve: async (_parent, { input: { email, password } }, ctx) => {
     const user = await ctx.prisma.user.findUnique({

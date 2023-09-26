@@ -12,15 +12,15 @@ export const CategoryType = objectType({
   },
 });
 
-export const CategoryResult = objectType({
-  name: 'CategoryResult',
+export const CategorySingleResult = objectType({
+  name: 'CategorySingleResult',
   definition(t) {
     t.field('data', { type: 'Category' });
   },
 });
 
-export const CategoriesResult = objectType({
-  name: 'CategoriesResult',
+export const CategoryListResult = objectType({
+  name: 'CategoryListResult',
   definition(t) {
     t.list.field('data', { type: 'Category' });
     t.field('pagination', { type: 'Pagination' });

@@ -15,7 +15,7 @@ export const UserType = objectType({
     t.field(User.createdAt);
     t.field(User.updatedAt);
     t.field('tasks', {
-      type: 'TasksResult',
+      type: 'TaskListResult',
       resolve: async (parent, args, ctx) => {
         const data = await ctx.prisma.task.findMany({
           where: { userId: parent.id },
@@ -31,7 +31,7 @@ export const UserType = objectType({
       },
     });
     t.field('categories', {
-      type: 'CategoriesResult',
+      type: 'CategoryListResult',
       resolve: async (parent, args, ctx) => {
         const data = await ctx.prisma.category.findMany({
           where: { userId: parent.id },

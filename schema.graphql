@@ -2,14 +2,21 @@
 ### Do not make changes to this file directly
 
 
-type AuthPayload {
+input AuthLoginInput {
+  email: String!
+  password: String!
+}
+
+type AuthLoginResult {
   token: String!
   user: User!
 }
 
-type CategoriesResult {
-  data: [Category]
-  pagination: Pagination
+input AuthRegisterInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
 }
 
 type Category {
@@ -23,7 +30,12 @@ input CategoryCreateInput {
   name: String!
 }
 
-type CategoryResult {
+type CategoryListResult {
+  data: [Category]
+  pagination: Pagination
+}
+
+type CategorySingleResult {
   data: Category
 }
 
@@ -36,18 +48,13 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTime
 
-input LoginInput {
-  email: String!
-  password: String!
-}
-
 type Mutation {
-  createOneCategory(input: CategoryCreateInput!): Category!
-  createOneTask(input: TaskCreateInput!): Task!
-  deleteOneTask(id: UUID!): Task!
-  login(input: LoginInput!): AuthPayload
-  register(input: RegisterInput!): String
-  updateOneTask(id: UUID!, input: TaskUpdateInput!): Task!
+  authLogin(input: AuthLoginInput!): AuthLoginResult
+  authRegister(input: AuthRegisterInput!): String
+  categoryCreate(input: CategoryCreateInput!): Category!
+  taskCreate(input: TaskCreateInput!): Task!
+  taskDelete(id: UUID!): Task!
+  taskUpdate(id: UUID!, input: TaskUpdateInput!): Task!
 }
 
 type Pagination {
@@ -55,20 +62,13 @@ type Pagination {
 }
 
 type Query {
-  findManyCategory(skip: Int, take: Int): CategoriesResult!
-  findManyTask(skip: Int, take: Int): TasksResult!
+  findManyCategory(skip: Int, take: Int): CategoryListResult!
+  findManyTask(skip: Int, take: Int): TaskListResult!
   me: User
 }
 
-input RegisterInput {
-  email: String!
-  firstName: String!
-  lastName: String!
-  password: String!
-}
-
 type Task {
-  category: CategoryResult
+  category: CategorySingleResult
   categoryId: UUID
   createdAt: DateTime!
   description: String
@@ -85,16 +85,16 @@ input TaskCreateInput {
   name: String!
 }
 
+type TaskListResult {
+  data: [Task]
+  pagination: Pagination
+}
+
 input TaskUpdateInput {
   categoryId: UUID!
   description: String
   isCompleted: Boolean
   name: String!
-}
-
-type TasksResult {
-  data: [Task]
-  pagination: Pagination
 }
 
 """
@@ -103,12 +103,12 @@ A field whose value is a generic Universally Unique Identifier: https://en.wikip
 scalar UUID
 
 type User {
-  categories: CategoriesResult
+  categories: CategoryListResult
   createdAt: DateTime!
   email: String!
   firstName: String!
   id: UUID
   lastName: String!
-  tasks: TasksResult
+  tasks: TaskListResult
   updatedAt: DateTime!
 }

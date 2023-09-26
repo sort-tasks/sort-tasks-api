@@ -3,7 +3,7 @@ import { nonNull, queryField } from 'nexus';
 import { getUserId } from 'utils/utils';
 
 export const CategoryFindManyQuery = queryField('findManyCategory', {
-  type: nonNull('CategoriesResult'),
+  type: nonNull('CategoryListResult'),
   args: {
     // where: 'CategoryWhereInput',
     // orderBy: list(arg({ type: 'CategoryOrderByInput' })),

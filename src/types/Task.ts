@@ -13,7 +13,7 @@ export const TaskType = objectType({
     t.field(Task.createdAt);
     t.field(Task.updatedAt);
     t.field('category', {
-      type: 'CategoryResult',
+      type: 'CategorySingleResult',
       resolve: async (parent, args, ctx) => {
         const data = await ctx.prisma.category.findUnique({ where: { id: parent.categoryId } });
 
@@ -23,8 +23,8 @@ export const TaskType = objectType({
   },
 });
 
-export const TasksResult = objectType({
-  name: 'TasksResult',
+export const TaskListResult = objectType({
+  name: 'TaskListResult',
   definition(t) {
     t.list.field('data', { type: 'Task' });
     t.field('pagination', { type: 'Pagination' });

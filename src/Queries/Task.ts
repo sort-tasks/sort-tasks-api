@@ -3,7 +3,7 @@ import { nonNull, queryField } from 'nexus';
 import { getUserId } from 'utils/utils';
 
 export const TaskFindManyQuery = queryField('findManyTask', {
-  type: nonNull('TasksResult'),
+  type: nonNull('TaskListResult'),
   args: {
     // where: 'TaskWhereInput',
     // orderBy: list(arg({ type: 'TaskOrderByInput' })),
