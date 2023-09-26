@@ -44,8 +44,10 @@ input LoginInput {
 type Mutation {
   createOneCategory(input: CategoryCreateInput!): Category!
   createOneTask(input: TaskCreateInput!): Task!
+  deleteOneTask(id: UUID!): Task!
   login(input: LoginInput!): AuthPayload
   register(input: RegisterInput!): String
+  updateOneTask(id: UUID!, input: TaskUpdateInput!): Task!
 }
 
 type Pagination {
@@ -77,7 +79,14 @@ type Task {
 }
 
 input TaskCreateInput {
-  categoryId: UUID
+  categoryId: UUID!
+  description: String
+  isCompleted: Boolean
+  name: String!
+}
+
+input TaskUpdateInput {
+  categoryId: UUID!
   description: String
   isCompleted: Boolean
   name: String!

@@ -46,7 +46,13 @@ export interface NexusGenInputs {
     password: string; // String!
   }
   TaskCreateInput: { // input type
-    categoryId?: NexusGenScalars['UUID'] | null; // UUID
+    categoryId: NexusGenScalars['UUID']; // UUID!
+    description?: string | null; // String
+    isCompleted?: boolean | null; // Boolean
+    name: string; // String!
+  }
+  TaskUpdateInput: { // input type
+    categoryId: NexusGenScalars['UUID']; // UUID!
     description?: string | null; // String
     isCompleted?: boolean | null; // Boolean
     name: string; // String!
@@ -143,8 +149,10 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createOneCategory: NexusGenRootTypes['Category']; // Category!
     createOneTask: NexusGenRootTypes['Task']; // Task!
+    deleteOneTask: NexusGenRootTypes['Task']; // Task!
     login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     register: string | null; // String
+    updateOneTask: NexusGenRootTypes['Task']; // Task!
   }
   Pagination: { // field return type
     totalItems: number | null; // Int
@@ -201,8 +209,10 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     createOneCategory: 'Category'
     createOneTask: 'Task'
+    deleteOneTask: 'Task'
     login: 'AuthPayload'
     register: 'String'
+    updateOneTask: 'Task'
   }
   Pagination: { // field return type name
     totalItems: 'Int'
@@ -246,11 +256,18 @@ export interface NexusGenArgTypes {
     createOneTask: { // args
       input: NexusGenInputs['TaskCreateInput']; // TaskCreateInput!
     }
+    deleteOneTask: { // args
+      id: NexusGenScalars['UUID']; // UUID!
+    }
     login: { // args
       input: NexusGenInputs['LoginInput']; // LoginInput!
     }
     register: { // args
       input: NexusGenInputs['RegisterInput']; // RegisterInput!
+    }
+    updateOneTask: { // args
+      id: NexusGenScalars['UUID']; // UUID!
+      input: NexusGenInputs['TaskUpdateInput']; // TaskUpdateInput!
     }
   }
   Query: {
