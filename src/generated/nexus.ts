@@ -53,6 +53,7 @@ export interface NexusGenInputs {
     categoryId: NexusGenScalars['UUID']; // UUID!
     completedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
+    dueAt?: NexusGenScalars['DateTime'] | null; // DateTime
     isCompleted?: boolean | null; // Boolean
     title: string; // String!
   }
@@ -60,6 +61,7 @@ export interface NexusGenInputs {
     categoryId: NexusGenScalars['UUID']; // UUID!
     completedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
+    dueAt?: NexusGenScalars['DateTime'] | null; // DateTime
     isCompleted?: boolean | null; // Boolean
     title: string; // String!
   }
@@ -108,6 +110,7 @@ export interface NexusGenObjects {
     completedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description?: string | null; // String
+    dueAt?: NexusGenScalars['DateTime'] | null; // DateTime
     id: NexusGenScalars['UUID']; // UUID!
     isCompleted: boolean; // Boolean!
     title: string; // String!
@@ -180,6 +183,7 @@ export interface NexusGenFieldTypes {
     completedAt: NexusGenScalars['DateTime'] | null; // DateTime
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string | null; // String
+    dueAt: NexusGenScalars['DateTime'] | null; // DateTime
     id: NexusGenScalars['UUID']; // UUID!
     isCompleted: boolean; // Boolean!
     title: string; // String!
@@ -244,6 +248,7 @@ export interface NexusGenFieldTypeNames {
     completedAt: 'DateTime'
     createdAt: 'DateTime'
     description: 'String'
+    dueAt: 'DateTime'
     id: 'UUID'
     isCompleted: 'Boolean'
     title: 'String'

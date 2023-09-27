@@ -80,6 +80,7 @@ type Task {
   completedAt: DateTime
   createdAt: DateTime!
   description: String
+  dueAt: DateTime
   id: UUID!
   isCompleted: Boolean!
   title: String!
@@ -90,6 +91,7 @@ input TaskCreateInput {
   categoryId: UUID!
   completedAt: DateTime
   description: String
+  dueAt: DateTime
   isCompleted: Boolean
   title: String!
 }
@@ -103,6 +105,7 @@ input TaskUpdateInput {
   categoryId: UUID!
   completedAt: DateTime
   description: String
+  dueAt: DateTime
   isCompleted: Boolean
   title: String!
 }
