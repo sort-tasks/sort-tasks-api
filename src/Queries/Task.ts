@@ -9,7 +9,7 @@ export const OrderedTasksByCategory = queryField('orderedTasksByCategory', {
 
     const data = await ctx.prisma.task.findMany({
       include: {
-        category: true, // Include the related Category model
+        category: true,
       },
       where: {
         userId: user.id,
@@ -17,11 +17,14 @@ export const OrderedTasksByCategory = queryField('orderedTasksByCategory', {
       orderBy: [
         {
           category: {
-            ordering: 'asc', // Order by Category.ordering in ascending order
+            ordering: 'asc',
           },
         },
         {
-          createdAt: 'asc', // Additional sorting, e.g., by task creation date
+          dueAt: 'asc',
+        },
+        {
+          createdAt: 'asc',
         },
       ],
     });
