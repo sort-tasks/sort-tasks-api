@@ -21,12 +21,33 @@ export const OrderedTasksByCategory = queryField('orderedTasksByCategory', {
           },
         },
         {
-          dueAt: 'asc',
-        },
-        {
           createdAt: 'asc',
         },
       ],
+    });
+
+    const currentDate = new Date();
+    const sortedData = [...data].sort((a, b) => {
+      const aDueInPast = a.dueAt && a.dueAt <= currentDate;
+      const bDueInPast = b.dueAt && b.dueAt <= currentDate;
+
+      if (aDueInPast && bDueInPast) {
+        return new Date(a.dueAt).getTime() - new Date(b.dueAt).getTime();
+      }
+
+      if (aDueInPast && !bDueInPast) {
+        return -1;
+      }
+
+      if (!aDueInPast && bDueInPast) {
+        return 1;
+      }
+
+      if (a.category.ordering === b.category.ordering) {
+        return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+      }
+
+      return a.category.ordering - b.category.ordering;
     });
 
     const pagination = {
@@ -38,7 +59,7 @@ export const OrderedTasksByCategory = queryField('orderedTasksByCategory', {
       }),
     };
 
-    return { data, pagination };
+    return { data: sortedData, pagination };
   },
 });
 
