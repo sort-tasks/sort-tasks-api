@@ -34,7 +34,7 @@ export const CategoryFindManyQuery = queryField('findManyCategory', {
         userId: userId.id,
       },
       orderBy: {
-        name: 'asc',
+        ordering: 'asc',
       },
     });
 
