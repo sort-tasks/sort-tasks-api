@@ -5,9 +5,9 @@ import { asNexusMethod, makeSchema, scalarType } from 'nexus';
 import NexusPrismaScalars from 'nexus-prisma/scalars';
 import * as path from 'path';
 
-import * as Mutations from './Mutations';
-import * as Queries from './Queries';
 import * as inputs from './inputs';
+import * as Mutations from './mutations';
+import * as Queries from './queries';
 import * as tasks from './types';
 
 const UUID = scalarType({
