@@ -26,20 +26,19 @@ export const OrderedTasksByCategory = queryField('orderedTasksByCategory', {
       ],
     });
 
-    const currentDate = new Date();
     const sortedData = [...data].sort((a, b) => {
-      const aDueInPast = a.dueAt && a.dueAt <= currentDate;
-      const bDueInPast = b.dueAt && b.dueAt <= currentDate;
+      const aHasDueAt = !!a.dueAt;
+      const bHasDueAt = !!b.dueAt;
 
-      if (aDueInPast && bDueInPast) {
+      if (aHasDueAt && bHasDueAt) {
         return new Date(a.dueAt).getTime() - new Date(b.dueAt).getTime();
       }
 
-      if (aDueInPast && !bDueInPast) {
+      if (aHasDueAt && !bHasDueAt) {
         return -1;
       }
 
-      if (!aDueInPast && bDueInPast) {
+      if (!aHasDueAt && bHasDueAt) {
         return 1;
       }
 
@@ -53,7 +52,6 @@ export const OrderedTasksByCategory = queryField('orderedTasksByCategory', {
     const pagination = {
       totalItems: await ctx.prisma.task.count({
         where: {
-          // ...where,
           userId: user.id,
         },
       }),
