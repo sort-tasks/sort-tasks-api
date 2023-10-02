@@ -50,13 +50,13 @@ export const AuthLoginMutation = mutationField('authLogin', {
     });
 
     if (!user) {
-      throw new Error(`Email not found`);
+      throw new Error(`Email or/and password is invalid`);
     }
 
     const passwordValid = await compare(password, user.password);
 
     if (!passwordValid) {
-      throw new Error('Invalid password');
+      throw new Error('Email or/and password is invalid');
     }
 
     if (!user.hasVerifiedEmail) {
