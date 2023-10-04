@@ -27,7 +27,7 @@ export const TaskType = objectType({
       resolve: async (parent, args, ctx) => {
         const data = await ctx.prisma.taskActivity.findMany({
           where: { taskId: parent.id },
-          orderBy: { createdAt: 'desc' },
+          orderBy: { createdAt: 'asc' },
         });
 
         return { data };
