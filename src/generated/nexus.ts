@@ -51,7 +51,6 @@ export interface NexusGenInputs {
   }
   TaskCreateInput: { // input type
     categoryId: NexusGenScalars['UUID']; // UUID!
-    completedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
     dueAt?: NexusGenScalars['DateTime'] | null; // DateTime
     isCompleted?: boolean | null; // Boolean
@@ -59,7 +58,6 @@ export interface NexusGenInputs {
   }
   TaskUpdateInput: { // input type
     categoryId: NexusGenScalars['UUID']; // UUID!
-    completedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
     dueAt?: NexusGenScalars['DateTime'] | null; // DateTime
     isCompleted?: boolean | null; // Boolean
@@ -132,6 +130,9 @@ export interface NexusGenObjects {
     data?: NexusGenRootTypes['Task'][] | null; // [Task!]
     pagination: NexusGenRootTypes['Pagination']; // Pagination!
   }
+  TaskSingleResult: { // root type
+    data?: NexusGenRootTypes['Task'] | null; // Task
+  }
   User: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
@@ -186,6 +187,7 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     findManyCategory: NexusGenRootTypes['CategoryListResult']; // CategoryListResult!
     findManyTask: NexusGenRootTypes['TaskListResult']; // TaskListResult!
+    findUniqueTask: NexusGenRootTypes['TaskSingleResult'] | null; // TaskSingleResult
     me: NexusGenRootTypes['User'] | null; // User
     orderedTasksByCategory: NexusGenRootTypes['TaskListResult']; // TaskListResult!
   }
@@ -217,6 +219,9 @@ export interface NexusGenFieldTypes {
   TaskListResult: { // field return type
     data: NexusGenRootTypes['Task'][] | null; // [Task!]
     pagination: NexusGenRootTypes['Pagination']; // Pagination!
+  }
+  TaskSingleResult: { // field return type
+    data: NexusGenRootTypes['Task'] | null; // Task
   }
   User: { // field return type
     categories: NexusGenRootTypes['CategoryListResult'] | null; // CategoryListResult
@@ -264,6 +269,7 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     findManyCategory: 'CategoryListResult'
     findManyTask: 'TaskListResult'
+    findUniqueTask: 'TaskSingleResult'
     me: 'User'
     orderedTasksByCategory: 'TaskListResult'
   }
@@ -295,6 +301,9 @@ export interface NexusGenFieldTypeNames {
   TaskListResult: { // field return type name
     data: 'Task'
     pagination: 'Pagination'
+  }
+  TaskSingleResult: { // field return type name
+    data: 'Task'
   }
   User: { // field return type name
     categories: 'CategoryListResult'
@@ -338,6 +347,9 @@ export interface NexusGenArgTypes {
     findManyTask: { // args
       skip?: number | null; // Int
       take?: number | null; // Int
+    }
+    findUniqueTask: { // args
+      id: NexusGenScalars['UUID']; // UUID!
     }
   }
 }

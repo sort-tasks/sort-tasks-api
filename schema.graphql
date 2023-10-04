@@ -70,6 +70,7 @@ type Pagination {
 type Query {
   findManyCategory(skip: Int, take: Int): CategoryListResult!
   findManyTask(skip: Int, take: Int): TaskListResult!
+  findUniqueTask(id: UUID!): TaskSingleResult
   me: User
   orderedTasksByCategory: TaskListResult!
 }
@@ -104,7 +105,6 @@ type TaskActivityListResult {
 
 input TaskCreateInput {
   categoryId: UUID!
-  completedAt: DateTime
   description: String
   dueAt: DateTime
   isCompleted: Boolean
@@ -116,9 +116,12 @@ type TaskListResult {
   pagination: Pagination!
 }
 
+type TaskSingleResult {
+  data: Task
+}
+
 input TaskUpdateInput {
   categoryId: UUID!
-  completedAt: DateTime
   description: String
   dueAt: DateTime
   isCompleted: Boolean

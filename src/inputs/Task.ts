@@ -7,7 +7,6 @@ export const TaskCreateInput = inputObjectType({
     t.string('description');
     t.nonNull.field('categoryId', { type: 'UUID' });
     t.boolean('isCompleted');
-    t.dateTime('completedAt');
     t.dateTime('dueAt');
   },
 });
@@ -19,7 +18,6 @@ export const TaskUpdateInput = inputObjectType({
     t.string('description');
     t.nonNull.field('categoryId', { type: 'UUID' });
     t.boolean('isCompleted');
-    t.dateTime('completedAt');
     t.dateTime('dueAt');
   },
 });

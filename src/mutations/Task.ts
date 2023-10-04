@@ -38,10 +38,18 @@ export const TaskUpdateInput = mutationField('taskUpdate', {
 
     const task = await ctx.prisma.task.findUnique({ where: { id } });
 
+    let completedAt = undefined;
+    if (!task.isCompleted && rest.isCompleted) {
+      completedAt = new Date();
+    } else if (task.isCompleted && !rest.isCompleted) {
+      completedAt = null;
+    }
+
     const updatedTask = await ctx.prisma.task.update({
       where: { id },
       data: {
         ...rest,
+        completedAt,
         category: { connect: { id: categoryId } },
         user: { connect: { id: user.id } },
       },

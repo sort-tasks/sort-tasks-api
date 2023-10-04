@@ -61,6 +61,25 @@ export const OrderedTasksByCategory = queryField('orderedTasksByCategory', {
   },
 });
 
+export const TaskFindUniqueQuery = queryField('findUniqueTask', {
+  type: 'TaskSingleResult',
+  args: {
+    id: nonNull('UUID'),
+  },
+  resolve: async (_parent, { id }, ctx) => {
+    const userId = await getUserId(ctx);
+
+    const task = await ctx.prisma.task.findUnique({
+      where: {
+        id,
+        userId: userId.id,
+      },
+    });
+
+    return { data: task };
+  },
+});
+
 export const TaskFindManyQuery = queryField('findManyTask', {
   type: nonNull('TaskListResult'),
   args: {

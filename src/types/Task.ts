@@ -43,3 +43,10 @@ export const TaskListResult = objectType({
     t.field('pagination', { type: nonNull('Pagination') });
   },
 });
+
+export const TaskSingleResult = objectType({
+  name: 'TaskSingleResult',
+  definition(t) {
+    t.field('data', { type: 'Task' });
+  },
+});
