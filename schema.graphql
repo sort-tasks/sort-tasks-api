@@ -75,6 +75,7 @@ type Query {
 }
 
 type Task {
+  activity: TaskActivityListResult!
   category: CategorySingleResult!
   categoryId: UUID!
   completedAt: DateTime
@@ -85,6 +86,20 @@ type Task {
   isCompleted: Boolean!
   title: String!
   updatedAt: DateTime!
+}
+
+type TaskActivity {
+  action: String!
+  after: String
+  before: String
+  createdAt: DateTime!
+  description: String
+  id: UUID!
+  updatedAt: DateTime!
+}
+
+type TaskActivityListResult {
+  data: [TaskActivity!]
 }
 
 input TaskCreateInput {

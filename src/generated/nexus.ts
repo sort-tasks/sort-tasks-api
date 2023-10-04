@@ -116,6 +116,18 @@ export interface NexusGenObjects {
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
+  TaskActivity: { // root type
+    action: string; // String!
+    after?: string | null; // String
+    before?: string | null; // String
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    description?: string | null; // String
+    id: NexusGenScalars['UUID']; // UUID!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  TaskActivityListResult: { // root type
+    data?: NexusGenRootTypes['TaskActivity'][] | null; // [TaskActivity!]
+  }
   TaskListResult: { // root type
     data?: NexusGenRootTypes['Task'][] | null; // [Task!]
     pagination: NexusGenRootTypes['Pagination']; // Pagination!
@@ -178,6 +190,7 @@ export interface NexusGenFieldTypes {
     orderedTasksByCategory: NexusGenRootTypes['TaskListResult']; // TaskListResult!
   }
   Task: { // field return type
+    activity: NexusGenRootTypes['TaskActivityListResult']; // TaskActivityListResult!
     category: NexusGenRootTypes['CategorySingleResult']; // CategorySingleResult!
     categoryId: NexusGenScalars['UUID']; // UUID!
     completedAt: NexusGenScalars['DateTime'] | null; // DateTime
@@ -188,6 +201,18 @@ export interface NexusGenFieldTypes {
     isCompleted: boolean; // Boolean!
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  TaskActivity: { // field return type
+    action: string; // String!
+    after: string | null; // String
+    before: string | null; // String
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    description: string | null; // String
+    id: NexusGenScalars['UUID']; // UUID!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  TaskActivityListResult: { // field return type
+    data: NexusGenRootTypes['TaskActivity'][] | null; // [TaskActivity!]
   }
   TaskListResult: { // field return type
     data: NexusGenRootTypes['Task'][] | null; // [Task!]
@@ -243,6 +268,7 @@ export interface NexusGenFieldTypeNames {
     orderedTasksByCategory: 'TaskListResult'
   }
   Task: { // field return type name
+    activity: 'TaskActivityListResult'
     category: 'CategorySingleResult'
     categoryId: 'UUID'
     completedAt: 'DateTime'
@@ -253,6 +279,18 @@ export interface NexusGenFieldTypeNames {
     isCompleted: 'Boolean'
     title: 'String'
     updatedAt: 'DateTime'
+  }
+  TaskActivity: { // field return type name
+    action: 'String'
+    after: 'String'
+    before: 'String'
+    createdAt: 'DateTime'
+    description: 'String'
+    id: 'UUID'
+    updatedAt: 'DateTime'
+  }
+  TaskActivityListResult: { // field return type name
+    data: 'TaskActivity'
   }
   TaskListResult: { // field return type name
     data: 'Task'

@@ -22,6 +22,17 @@ export const TaskType = objectType({
         return { data };
       },
     });
+    t.field('activity', {
+      type: nonNull('TaskActivityListResult'),
+      resolve: async (parent, args, ctx) => {
+        const data = await ctx.prisma.taskActivity.findMany({
+          where: { taskId: parent.id },
+          orderBy: { createdAt: 'desc' },
+        });
+
+        return { data };
+      },
+    });
   },
 });
 

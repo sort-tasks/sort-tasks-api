@@ -12,35 +12,51 @@ datasource db {
 }
 
 model User {
-  id                   String     @id @default(uuid())
-  email                String     @unique
+  id                   String         @id @default(uuid())
+  email                String         @unique
   password             String
   firstName            String
   lastName             String
-  hasVerifiedEmail     Boolean    @default(false)
-  hashToVerifyEmail    String?    @unique
-  hashToChangePassword String?    @unique
-  createdAt            DateTime   @default(now())
-  updatedAt            DateTime   @default(now()) @updatedAt
+  hasVerifiedEmail     Boolean        @default(false)
+  hashToVerifyEmail    String?        @unique
+  hashToChangePassword String?        @unique
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @default(now()) @updatedAt
   deletedAt            DateTime?
   categories           Category[]
   tasks                Task[]
+  TaskActivity         TaskActivity[]
 }
 
 model Task {
-  id          String    @id @default(uuid())
+  id           String         @id @default(uuid())
+  userId       String
+  categoryId   String
+  title        String
+  isCompleted  Boolean        @default(false)
+  description  String?
+  completedAt  DateTime?
+  dueAt        DateTime?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @default(now()) @updatedAt
+  deletedAt    DateTime?
+  user         User           @relation(fields: [userId], references: [id])
+  category     Category       @relation(fields: [categoryId], references: [id])
+  TaskActivity TaskActivity[]
+}
+
+model TaskActivity {
+  id          String   @id @default(uuid())
+  taskId      String
   userId      String
-  categoryId  String
-  title       String
-  isCompleted Boolean   @default(false)
+  action      String
+  before      String?
+  after       String?
   description String?
-  completedAt DateTime?
-  dueAt       DateTime?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @default(now()) @updatedAt
-  deletedAt   DateTime?
-  user        User      @relation(fields: [userId], references: [id])
-  category    Category  @relation(fields: [categoryId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+  task        Task     @relation(fields: [taskId], references: [id])
+  user        User     @relation(fields: [userId], references: [id])
 }
 
 model Category {
