@@ -49,6 +49,11 @@ export interface NexusGenInputs {
     name: string; // String!
     ordering: number; // Int!
   }
+  TaskActivityCreateInput: { // input type
+    action: string; // String!
+    description?: string | null; // String
+    taskId: NexusGenScalars['UUID']; // UUID!
+  }
   TaskCreateInput: { // input type
     categoryId: NexusGenScalars['UUID']; // UUID!
     description?: string | null; // String
@@ -177,6 +182,7 @@ export interface NexusGenFieldTypes {
     authLogin: NexusGenRootTypes['AuthLoginResult'] | null; // AuthLoginResult
     authRegister: string | null; // String
     categoryCreate: NexusGenRootTypes['Category']; // Category!
+    taskActivityCreate: NexusGenRootTypes['TaskActivity']; // TaskActivity!
     taskCreate: NexusGenRootTypes['Task']; // Task!
     taskDelete: NexusGenRootTypes['Task']; // Task!
     taskUpdate: NexusGenRootTypes['Task']; // Task!
@@ -259,6 +265,7 @@ export interface NexusGenFieldTypeNames {
     authLogin: 'AuthLoginResult'
     authRegister: 'String'
     categoryCreate: 'Category'
+    taskActivityCreate: 'TaskActivity'
     taskCreate: 'Task'
     taskDelete: 'Task'
     taskUpdate: 'Task'
@@ -327,6 +334,9 @@ export interface NexusGenArgTypes {
     }
     categoryCreate: { // args
       input: NexusGenInputs['CategoryCreateInput']; // CategoryCreateInput!
+    }
+    taskActivityCreate: { // args
+      input: NexusGenInputs['TaskActivityCreateInput']; // TaskActivityCreateInput!
     }
     taskCreate: { // args
       input: NexusGenInputs['TaskCreateInput']; // TaskCreateInput!

@@ -58,6 +58,7 @@ type Mutation {
   authLogin(input: AuthLoginInput!): AuthLoginResult
   authRegister(input: AuthRegisterInput!): String
   categoryCreate(input: CategoryCreateInput!): Category!
+  taskActivityCreate(input: TaskActivityCreateInput!): TaskActivity!
   taskCreate(input: TaskCreateInput!): Task!
   taskDelete(id: UUID!): Task!
   taskUpdate(id: UUID!, input: TaskUpdateInput!): Task!
@@ -97,6 +98,12 @@ type TaskActivity {
   description: String
   id: UUID!
   updatedAt: DateTime!
+}
+
+input TaskActivityCreateInput {
+  action: String!
+  description: String
+  taskId: UUID!
 }
 
 type TaskActivityListResult {
